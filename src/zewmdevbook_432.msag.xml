@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZEWMDEVBOOK_432</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>EWM Architecture and Programming</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEWMDEVBOOK_432</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>No Packaging Material maintained for HU-Type &amp;1</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEWMDEVBOOK_432</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Packaging Material &amp;1 not found</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEWMDEVBOOK_432</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>No alternative UOM found for product &amp;1</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>
