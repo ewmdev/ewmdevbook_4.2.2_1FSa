@@ -24,10 +24,8 @@ CLASS ZCL_IM_HU_BASICS_AUTOPACK IMPLEMENTATION.
 
   METHOD /scwm/if_ex_hu_basics_autopack~hu_proposal.
 
-    DATA: ls_mat_global TYPE /scwm/s_material_global,
-          lt_mat_uom    TYPE /scwm/tt_material_uom,
-          lt_matnr      TYPE /scmb/mdl_matnr_tab,
-          lv_quancla    TYPE /scwm/de_quancla.              "#EC NEEDED
+    DATA: lt_mat_uom TYPE /scwm/tt_material_uom,
+          lv_quancla TYPE /scwm/de_quancla.
 
     BREAK-POINT ID zewmdevbook_432.
     DATA(lo_pack) = CAST /scwm/cl_hu_packing( io_pack_ref ).
@@ -43,7 +41,7 @@ CLASS ZCL_IM_HU_BASICS_AUTOPACK IMPLEMENTATION.
     ENDIF.
 
     LOOP AT ct_pack ASSIGNING FIELD-SYMBOL(<pack>).
-      CLEAR: ls_mat_global, lt_mat_uom.
+      CLEAR: lt_mat_uom.
 *2 get product master for each delivery-item
       TRY.
           CALL FUNCTION '/SCWM/MATERIAL_READ_SINGLE'
@@ -81,13 +79,13 @@ CLASS ZCL_IM_HU_BASICS_AUTOPACK IMPLEMENTATION.
           WHERE lgnum = @lo_pack->gv_lgnum
           AND quancla = @lv_quancla.
         IF ls_zhu_pmat-packmat IS INITIAL.
-*error: No Packaging Material maintained for QUANCLA &1.
+*error: No Packaging Material maintained for Quan.Class. &1.
           MESSAGE e001(zewmdevbook_432) WITH lv_quancla.
           io_pack_ref->go_log->add_message( ).
           EXIT.
         ENDIF.
         DATA(lv_packmatid) = lo_stock->get_matid_by_no(
-                               iv_matnr = ls_zhu_pmat-packmat ).
+                             iv_matnr = ls_zhu_pmat-packmat ).
 *5 determine target quantity and UoM
         LOOP AT st_tuom_qcla INTO DATA(ls_quancla) WHERE quancla = lv_quancla.
           DATA(ls_mat_uom) = VALUE #( lt_mat_uom[ matid = <pack>-matid
@@ -126,7 +124,8 @@ CLASS ZCL_IM_HU_BASICS_AUTOPACK IMPLEMENTATION.
           io_pack_ref->go_log->add_message( ).
           EXIT.
         ENDIF.
-        CLEAR: ls_mat, ls_quan, ls_hu_crea, lv_quancla, ls_huhdr, ls_quancla, ls_mat_uom, ls_zhu_pmat.
+        CLEAR: ls_mat, ls_quan, ls_hu_crea, lv_quancla,
+               ls_huhdr, ls_quancla, ls_mat_uom, ls_zhu_pmat.
       ENDWHILE.
     ENDLOOP.
 
