@@ -28,7 +28,7 @@ CLASS ZCL_IM_HU_BASICS_AUTOPACK IMPLEMENTATION.
           lv_quancla TYPE /scwm/de_quancla.
 
     BREAK-POINT ID zewmdevbook_432.
-    DATA(lo_pack) = CAST /scwm/cl_hu_packing( io_pack_ref ).
+    DATA(lo_pack)  = CAST /scwm/cl_hu_packing( io_pack_ref ).
     DATA(lo_stock) = NEW /scwm/cl_ui_stock_fields( ).
 * 1 get quantity classification (prefetch)
     IF st_tuom_qcla IS INITIAL.
