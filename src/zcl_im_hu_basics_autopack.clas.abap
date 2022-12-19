@@ -27,7 +27,7 @@ CLASS ZCL_IM_HU_BASICS_AUTOPACK IMPLEMENTATION.
     DATA: lt_mat_uom TYPE /scwm/tt_material_uom,
           lv_quancla TYPE /scwm/de_quancla.
 
-    BREAK-POINT ID zewmdevbook_432.
+    BREAK-POINT ID zewmdevbook_1fsa.
     DATA(lo_pack)  = CAST /scwm/cl_hu_packing( io_pack_ref ).
     DATA(lo_stock) = NEW /scwm/cl_ui_stock_fields( ).
 * 1 get quantity classification (prefetch)
@@ -80,7 +80,7 @@ CLASS ZCL_IM_HU_BASICS_AUTOPACK IMPLEMENTATION.
           AND quancla = @lv_quancla.
         IF ls_zhu_pmat-packmat IS INITIAL.
 *error: No Packaging Material maintained for Quan.Class. &1.
-          MESSAGE e001(zewmdevbook_432) WITH lv_quancla.
+          MESSAGE e001(zewmdevbook_1fsa) WITH lv_quancla.
           io_pack_ref->go_log->add_message( ).
           EXIT.
         ENDIF.
@@ -95,7 +95,8 @@ CLASS ZCL_IM_HU_BASICS_AUTOPACK IMPLEMENTATION.
           ENDIF.
         ENDLOOP.
 *6 create new hu
-        DATA(ls_hu_crea) = VALUE /scwm/s_huhdr_create_ext( hutyp = ls_zhu_pmat-hutyp ).
+        DATA(ls_hu_crea) = VALUE /scwm/s_huhdr_create_ext(
+          hutyp = ls_zhu_pmat-hutyp ).
         DATA(ls_huhdr) = io_pack_ref->create_hu(
           EXPORTING
             iv_pmat      = lv_packmatid
